@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: SSM2
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      continue-on-error: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_mybatis?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: breeze
+    password: "!P@ssword"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
