@@ -5,10 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Student {
+public class Course {
     private Integer id;
     private String name;
-    private char sex;
-    private StudentID sid;
-    private List<Course> courses;
+    private String code;
+    private List<Student> students;
 }
