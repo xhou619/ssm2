@@ -15,19 +15,28 @@
                      select="com.example.ssm2.mapper.StudentIDMapper.findCodeById"/>
     </resultMap>
     <select id="findStudentById2" parameterType="Integer" resultMap="studentWithId2Result">
-        select s.*, card.*
+        select s.id as s_id, s.name, s.sex, card.id as card_id, card.code, c.id as cid, c.name as cname, c.code as ccode
         from t_student s,
+             t_course c,
+             t_elective_course ec,
              t_student_id card
         where s.sid = card.id
+          and ec.uid = s.id
+          and c.id = ec.cid
           and s.id = #{id}
     </select>
     <resultMap id="studentWithId2Result" type="com.example.ssm2.po.Student">
-        <id property="id" column="id" />
+        <id property="id" column="s_id" />
         <result property="name" column="name" />
         <result property="sex" column="sex" />
         <association property="sid" javaType="com.example.ssm2.po.StudentID">
-            <id property="id" column="id" />
+            <id property="id" column="card_id" />
             <result property="code" column="code" />
         </association>
+        <collection property="courses" ofType="com.example.ssm2.po.Course">
+            <id property="id" column="cid" />
+            <result property="name" column="cname" />
+            <result property="code" column="ccode" />
+        </collection>
     </resultMap>
 </mapper>
